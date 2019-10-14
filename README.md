@@ -32,6 +32,13 @@ Also there is a bit of CQRS here i.e each variant of system usage is described a
 All work related to specific usecase is handled by Handlers (`\App\Application\UseCase\CalculateNetSalary\CalculateNetSalaryHandler`) 
 and `Command` is just a representation of input data for usecase (`\App\Application\UseCase\CalculateNetSalary\CalculateNetSalaryCommand`).       
 
+As for salary calculation itself, in order to make it extensible with minor code changes (but open for extend) 
+I implemented in a way where calculation logic is placed in Rules `\App\Domain\Salary\SalaryCalculationRules\SalaryCalculationRuleInterface`.
+We can create more rules and add them to Calculator if logic changes in future. 
+In general it's based on following business logic: first we calculate gross salary, then apply taxes on it, 
+so in `\App\Domain\Salary\SalaryCalculator` I deliberately set two arguments: first - rules for salary amount modification,
+second - rules for applying taxes. Since tax amount also variable, I've added some rule-based logic for tax calculation.      
+
 TODOs: 
  - add command bus - i.e a service which takes usecase Command, finds handler and makes handler do all processing;
    besides it, CommandBus usually performs other duties like Command validation, logging, monitoring, etc...
