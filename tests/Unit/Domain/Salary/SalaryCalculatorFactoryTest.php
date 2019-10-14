@@ -10,8 +10,7 @@ class SalaryCalculatorFactoryTest extends TestCase
 {
     public function testItCanProduceSalaryCalculator()
     {
-        $calculatorFactory = new SalaryCalculatorFactory();
-        $salaryCalculator = $calculatorFactory->createSalaryCalculator(0.5, 67, 0.05, 3, 0.02, 50);
+        $salaryCalculator = SalaryCalculatorFactory::createConfiguredCalculator();
         $this->assertInstanceOf(SalaryCalculator::class, $salaryCalculator);
     }
 }

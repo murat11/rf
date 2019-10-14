@@ -18,8 +18,7 @@ class CalculateNetSalaryHandlerTest extends TestCase
     {
         parent::__construct($name, $data, $dataName);
         $this->handler = new CalculateNetSalaryHandler(
-            (new SalaryCalculatorFactory())
-                ->createSalaryCalculator(20,50, 7, 3, 2,500)
+            SalaryCalculatorFactory::createConfiguredCalculator()
         );
     }
 

@@ -10,36 +10,31 @@ use App\Domain\Salary\TaxCalculationRules\KidsRespectingRule;
 
 /**
  * Class SalaryCalculatorFactory
+ * @todo Calculator configuration from config files
  */
 class SalaryCalculatorFactory
 {
+    private const COUNTRY_TAX = 20;
+    private const MIN_KIDS_TO_RESPECT = 3;
+    private const TAX_REDUCER_FOR_KIDS = 2;
+    private const MIN_AGE_TO_RESPECT = 50;
+    private const PERCENT_FOR_AGE = 7;
+    private const FEE_FOR_CAR = 500;
+
     /**
-     * @param float $countryTax
-     * @param int $ageToRespect
-     * @param float $percentsForAge
-     * @param int $minKidsToRespect
-     * @param float $taxReducerForKids
-     * @param float $feeForCar
-     *
      * @return SalaryCalculator
      */
-    public function createSalaryCalculator(
-        float $countryTax,
-        int $ageToRespect,
-        float $percentsForAge,
-        int $minKidsToRespect,
-        float $taxReducerForKids,
-        float $feeForCar
-    ) {
+    public static function createConfiguredCalculator()
+    {
         $taxRule = new TaxedSalaryCalculationRule(
-            $countryTax,
-            [new KidsRespectingRule($minKidsToRespect, $taxReducerForKids)]
+            self::COUNTRY_TAX,
+            [new KidsRespectingRule(self::MIN_KIDS_TO_RESPECT, self::TAX_REDUCER_FOR_KIDS)]
         );
 
         $amountRule = new ChainedSalaryCalculationRule(
             [
-                new AgeRespectingSalaryCalculationRule($ageToRespect, $percentsForAge),
-                new CarUsageAwareSalaryCalculationRule($feeForCar),
+                new AgeRespectingSalaryCalculationRule(self::MIN_AGE_TO_RESPECT, self::PERCENT_FOR_AGE),
+                new CarUsageAwareSalaryCalculationRule(self::FEE_FOR_CAR),
             ]
         );
 
