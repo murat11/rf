@@ -1,0 +1,15 @@
+version: '2'
+services:
+  php:
+    build:
+        context: ./php
+        dockerfile: Dockerfile
+    ports:
+      - "9000"
+    volumes:
+      - "../:/srv/rf"
+    labels:
+      name: "App server"
+    working_dir: "/srv/rf"
+    environment:
+      PHP_IDE_CONFIG: "serverName=RF"
