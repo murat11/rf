@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Test\Unit\Domain\Salary;
 
@@ -11,7 +11,7 @@ class SalaryCalculatorFactoryTest extends TestCase
     public function testItCanProduceSalaryCalculator()
     {
         $calculatorFactory = new SalaryCalculatorFactory();
-        $salaryCalculator = $calculatorFactory->createSalaryCalculator(0.5, 67, 0.05, 3, 0.02, true);
+        $salaryCalculator = $calculatorFactory->createSalaryCalculator(0.5, 67, 0.05, 3, 0.02, 50);
         $this->assertInstanceOf(SalaryCalculator::class, $salaryCalculator);
     }
 }
