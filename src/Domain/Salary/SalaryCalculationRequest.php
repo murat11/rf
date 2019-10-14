@@ -29,24 +29,24 @@ class SalaryCalculationRequest
     /**
      * @var float
      */
-    private $netSalary;
+    private $grossSalary;
 
     /**
      * Employee constructor.
      *
      * @param string $name
-     * @param float $salary
+     * @param float $grossSalary
      * @param int $age
      * @param int $numberOfKids
      * @param bool $usesCompanyCar
      */
-    public function __construct(string $name, float $salary, int $age, int $numberOfKids = 0, bool $usesCompanyCar = false)
+    public function __construct(string $name, float $grossSalary, int $age, int $numberOfKids = 0, bool $usesCompanyCar = false)
     {
         $this->name = $name;
         $this->age = $age;
         $this->numberOfKids = $numberOfKids;
         $this->usesCompanyCar = $usesCompanyCar;
-        $this->netSalary = $salary;
+        $this->grossSalary = $grossSalary;
     }
 
     /**
@@ -84,8 +84,8 @@ class SalaryCalculationRequest
     /**
      * @return float
      */
-    public function getNetSalary(): float
+    public function getGrossSalary(): float
     {
-        return $this->netSalary;
+        return $this->grossSalary;
     }
 }

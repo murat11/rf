@@ -28,9 +28,9 @@ class SalaryCalculator
     /**
      * @inheritDoc
      */
-    public function calculateGrossSalary(SalaryCalculationRequest $calculationRequest): float
+    public function calculateNetSalary(SalaryCalculationRequest $calculationRequest): float
     {
-        $salary = $calculationRequest->getNetSalary();
+        $salary = $calculationRequest->getGrossSalary();
         $salary = $this->amountRule->applyRuleToSalary($salary, $calculationRequest);
         $salary = $this->taxRule->applyRuleToSalary($salary, $calculationRequest);
 

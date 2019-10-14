@@ -10,11 +10,11 @@ use PHPUnit\Framework\TestCase;
 
 class SalaryCalculatorTest extends TestCase
 {
-    public function testItCalculatesGrossSalaryCorrectly()
+    public function testItCalculatesNetSalaryCorrectly()
     {
         /** @var SalaryCalculationRequest | MockObject $calculationRequest */
         $calculationRequest = $this->createMock(SalaryCalculationRequest::class);
-        $calculationRequest->method('getNetSalary')->willReturn(100.00);
+        $calculationRequest->method('getGrossSalary')->willReturn(100.00);
 
         /** @var SalaryCalculationRuleInterface | MockObject $amountRule */
         $amountRule = $this->createMock(SalaryCalculationRuleInterface::class);
@@ -25,8 +25,8 @@ class SalaryCalculatorTest extends TestCase
         $taxRule->expects($this->once())->method('applyRuleToSalary')->with(90.00, $calculationRequest)->willReturn(80.00);
 
         $calculator = new SalaryCalculator($amountRule, $taxRule);
-        $grossSalary = $calculator->calculateGrossSalary($calculationRequest);
+        $netSalary = $calculator->calculateNetSalary($calculationRequest);
 
-        $this->assertEquals(80.00, $grossSalary);
+        $this->assertEquals(80.00, $netSalary);
     }
 }
