@@ -2,7 +2,8 @@
     "type": "project",
     "require": {
         "php": "^7.2",
-        "ext-json": "*"
+        "ext-json": "*",
+        "symfony/console": "^4.3"
     },
     "config": {
         "preferred-install": {
