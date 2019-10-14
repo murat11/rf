@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use App\Infrastructure\StaticCommandLoader;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 
@@ -10,4 +11,5 @@ require dirname(__DIR__).'/vendor/autoload.php';
 
 $input = new ArgvInput();
 $application = new Application('RF', '1');
+$application->setCommandLoader(new StaticCommandLoader());
 $application->run($input);
